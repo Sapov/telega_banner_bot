@@ -6,7 +6,8 @@ price_luvers = 120 # руб. за 1 метр погонный
 # whidh_banner = float(input("Введите длину баннера в метрах: ").replace(',', '.'))
 
 def main(length_banner, whidh_banner):
-# если длина меньше ширины мы меняем значения переменных местами ДЛИНА всегда у нас больше
+
+    # если длина меньше ширины мы меняем значения переменных местами ДЛИНА всегда у нас больше
     if length_banner < whidh_banner:
         length_banner, whidh_banner = whidh_banner, length_banner
            # прибавляем поля
