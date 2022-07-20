@@ -52,7 +52,7 @@ async def load_length(message: types.Message, state: FSMContext):
             w = str(w.replace(',', '.'))
             print(type(l))
 
-            #ВЫлвыоиваем не чмсленные значения
+            #ВЫлавлтваем не чмсленные значения
             try:
                 l = float(l)
                 w = float(w)
