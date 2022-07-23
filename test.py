@@ -9,7 +9,7 @@ def main(length_banner, whidh_banner):
     if length_banner < whidh_banner:
         length_banner, whidh_banner = whidh_banner, length_banner
            # прибавляем поля
-    print("ШИРИНА", whidh_banner )
+    print("ШИРИНА", whidh_banner)
     print('Длина', length_banner)
     whidh_banner = whidh_banner + 0.1
     length_banner = length_banner + 0.1
@@ -20,7 +20,7 @@ def main(length_banner, whidh_banner):
     if whidh_banner <= 3.1:
         for i in range(len(width_banner_list)):
             print("Подбираем ширину из списка", width_banner_list[i])
-            if whidh_banner > width_banner_list[i]:
+            if whidh_banner >= width_banner_list[i]:
                 print("Нужен ролик шире", width_banner_list[i])
             else:
                 print("Печатаем на ролике", width_banner_list[i])
@@ -34,9 +34,6 @@ def main(length_banner, whidh_banner):
         # тогда делим длинную сторону length_banner на 3.1
         price_print = "Не умею считать баннера со склейкаой. Пока!"
         print(price_print)
-
-
-
 
 
     # считаем стоимость печати умножаем ширину ролика на стоимость прайса и округляем

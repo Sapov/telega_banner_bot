@@ -5,8 +5,7 @@ from keybords import kb_client
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
-from create_bot import dp
-from test import main
+
 # ******************************** КЛИЕНТСКАЯ ЧАСТЬ ****************************
 # @dp.message_handler(commands=['start', 'help'])
 async def command_start(message : types.Message):
@@ -21,6 +20,7 @@ async def command_start(message : types.Message):
 class FSMAdmin(StatesGroup):
     width = State()
     length = State()
+    pole = State()
 
 
 # начала диалога
