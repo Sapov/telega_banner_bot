@@ -6,8 +6,11 @@ def razmer ():
     '''Запрашиваем размеры "Баннера" и спрашивае нужно ли поле для люверсов
     length_banner - Длина баннера
     whidh_banner - Ширина баннера'''
-    length_banner = float(input("Введите ширину баннера в метрах (например 1.2): ").replace(',', '.'))
-    whidh_banner = float(input("Введите длину баннера в метрах: ").replace(',', '.'))
+
+   # length_banner = float(input("Введите ширину баннера в метрах (например 1.2): ").replace(',', '.'))
+   #  whidh_banner = input("Введите длину баннера в метрах: ").replace(',', '.')
+    length_banner = pyip.inputFloat("Введите ширину печати в метрах: ")
+    whidh_banner = pyip.inputFloat("Введите длину печати в метрах: ")
 
     pole_for_luvers = pyip.inputYesNo('''Нужно ли прибавить поля для установки люверсов или проклейки?
     Введите:
