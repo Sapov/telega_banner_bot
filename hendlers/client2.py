@@ -4,8 +4,6 @@ from create_bot import bot
 from keybords import kb_client
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
-
 
 
 # ******************************** КЛИЕНТСКАЯ ЧАСТЬ ****************************
@@ -19,26 +17,17 @@ async def command_start(message : types.Message):
 
 
 
-# class FSMAdmin(StatesGroup):
-#     width = State()
-#     length = State()
-#     pole = State()
-
-inkb = InlineKeyboardMarkup(row_width=1).add(InlineKeyboardButton(text="Кнопка 1", callback_data='www'))
-# @dp.message_handeler(commands='test')
-async def test_commads(message:types.Message):
-    await message.answer("Кнопочка", reply_markup=inkb)
+class FSMAdmin(StatesGroup):
+    width = State()
+    length = State()
+    pole = State()
 
 
-# @dp.callback_query_hadler(text='www')
-async def www_call(callback:types.CallbackQuery):
-    await callback.answer(' Нажата кнопка')
-
-# !!!!!!
-# @dp.message_handler(commands=["Печать на баннере"])
-async def one_menu(message: types.Message):
-    await bot.send_message(message.from_user.id, "переходим в подменю", reply_markup=ReplyKeyboardRemove)
-    await message.delete()
+# начала диалога
+# @dp.message_handler(commands = "Загрузить", state = None)
+async def cn_start(message: types.Message):
+    await FSMAdmin.width.set()
+    await message.answer("Введите ширину баннера в метрах ")
 
 
 # Ловим ответ
@@ -82,17 +71,10 @@ async def load_length(message: types.Message, state: FSMContext):
 # регистрируем хендлеры
 def register_hendlers_client(dp: Dispatcher):
     dp.register_message_handler(command_start, commands=['start', 'help'])
-    dp.register_message_handler(one_menu, commands=["Печать_на_баннере"], state=None)
-    # dp.register_message_handler(cn_start, commands="440_грамм", state=None)
-    # dp.register_message_handler(load_width, state=FSMAdmin.width)
-    # dp.register_message_handler(load_length, state=FSMAdmin.length)
-    dp.register_message_handler(test_commads, commands=['test'])
 
-def callback_query_hadler(dp: Dispatcher):
-    dp.callback_query_hadler(www_call, text='www')
-
-
-
+    dp.register_message_handler(cn_start, commands="440_грамм", state=None)
+    dp.register_message_handler(load_width, state=FSMAdmin.width)
+    dp.register_message_handler(load_length, state=FSMAdmin.length)
 
 
 
