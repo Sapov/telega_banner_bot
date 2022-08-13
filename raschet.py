@@ -37,7 +37,8 @@ def pole(whidh_banner, length_banner): #  прибавляем поля
     length_banner = length_banner + 0.1
     print('c полями баннер', whidh_banner,"м", 'x', length_banner,"м")
     return whidh_banner, length_banner
-
+def materials():
+    '''фукция получает на вход название материала и определяет ширины роликов материалов'''
 
 width_banner_list = [1.1, 1.37, 1.6, 2.2, 2.5, 3.2]
 def select_banner(length_banner, whidh_banner, price_banner): # подбираем ширину ролика для печати
@@ -76,7 +77,7 @@ def main(price_banner):
     S_bannera(length_banner, whidh_banner)
     if pole_for_luvers == "да":
         l, w = pole(l, w)
-    select_banner(l,w, price_banner)
+    select_banner(l, w, price_banner)
 
 # main(price_banner)
 

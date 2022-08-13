@@ -2,9 +2,11 @@ from aiogram import Dispatcher, types
 import test
 from create_bot import bot
 from keybords import kb_client
+from keybords import menu_banner
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.dispatcher.filters import Text
+
 
 
 
@@ -19,26 +21,39 @@ async def command_start(message : types.Message):
 
 
 
-# class FSMAdmin(StatesGroup):
-#     width = State()
-#     length = State()
-#     pole = State()
-
-inkb = InlineKeyboardMarkup(row_width=1).add(InlineKeyboardButton(text="Кнопка 1", callback_data='www'))
-# @dp.message_handeler(commands='test')
-async def test_commads(message:types.Message):
-    await message.answer("Кнопочка", reply_markup=inkb)
+class FSMAdmin(StatesGroup):
+    width = State()
+    length = State()
+    pole = State()
 
 
-# @dp.callback_query_hadler(text='www')
-async def www_call(callback:types.CallbackQuery):
-    await callback.answer(' Нажата кнопка')
+async def banner_440 (message: types.Message):
+    await FSMAdmin.width.set()
+    await message.answer("Введите ширину в метрах ")
 
 # !!!!!!
 # @dp.message_handler(commands=["Печать на баннере"])
 async def one_menu(message: types.Message):
-    await bot.send_message(message.from_user.id, "переходим в подменю", reply_markup=ReplyKeyboardRemove)
-    await message.delete()
+    await message.reply("_", reply_markup=types.ReplyKeyboardRemove())# удаляем клавиатуру
+    await bot.send_message(message.from_user.id, "Выберите плотность баннера: ", reply_markup=menu_banner)
+    # await message.delete()
+
+# @dp.message(Text("С CEТКА"))
+async def print_setka(message: types.Message):
+    await message.reply("СЕТКА --Отличный выбор!")
+
+async def print_film(message: types.Message):
+    await message.reply("Пленка --Отличный выбор!")
+
+async def print_perfo(message: types.Message):
+    await message.reply("Перфо --Отличный выбор!")
+
+async def print_paper(message: types.Message):
+    await message.reply("Бумага --Отличный выбор!")
+
+async def print_oboi(message: types.Message):
+    await message.reply("обои --Отличный выбор!")
+
 
 
 # Ловим ответ
@@ -47,7 +62,7 @@ async def load_width(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['whidh_banner'] = message.text
         await FSMAdmin.next()
-        await message.reply("Введите длину баннера в метрах")
+        await message.reply("Введите длину в метрах")
 
 
 # Ловим 2 ответ
@@ -61,7 +76,7 @@ async def load_length(message: types.Message, state: FSMContext):
             l = data['length_banner']
             l = str(l.replace(',', '.'))
             w = str(w.replace(',', '.'))
-            print(type(l))
+
 
             #ВЫлавлтваем не чмсленные значения
             try:
@@ -78,18 +93,45 @@ async def load_length(message: types.Message, state: FSMContext):
             except:
                 await state.finish()
 
+# @bot.message_handler(content_types=['document'])
+# async def handle_docs_photo(message):
+#     ''' Сохранение файликов'''
+#     await
+#
+#     try:
+#         chat_id = message.chat.id
+#
+#         file_info = bot.get_file(message.document.file_id)
+#         downloaded_file = bot.download_file(file_info.file_path)
+#
+#         src = 'C:/Users/sasha/PycharmProjects/telega_banner_bot/received/' + message.document.file_name;
+#
+#         with open(src, 'wb') as new_file:
+#             new_file.write(downloaded_file)
+#
+#         bot.reply_to(message, "Пожалуй, я сохраню это")
+#     except Exception as e:
+#         bot.answer_inline_query(message, e)
+#
+
 
 # регистрируем хендлеры
 def register_hendlers_client(dp: Dispatcher):
-    dp.register_message_handler(command_start, commands=['start', 'help'])
-    dp.register_message_handler(one_menu, commands=["Печать_на_баннере"], state=None)
-    # dp.register_message_handler(cn_start, commands="440_грамм", state=None)
-    # dp.register_message_handler(load_width, state=FSMAdmin.width)
-    # dp.register_message_handler(load_length, state=FSMAdmin.length)
-    dp.register_message_handler(test_commads, commands=['test'])
+    dp.register_message_handler(command_start, commands=['start', 'help', 'Назад'])
+    dp.register_message_handler(one_menu, Text("Печать на баннере"), state=None)
+    # dp.register_message_handler(print_setka, Text("Печать на сетке"))
+    dp.register_message_handler(print_film, Text("Печать на пленке"))
+    dp.register_message_handler(print_perfo, Text("Печать на перфопленке"))
+    dp.register_message_handler(print_paper, Text("Печать на бумаге"))
+    dp.register_message_handler(print_oboi, Text("Печать на фотообоях"))
+    dp.register_message_handler(banner_440, Text("Баннер 440 грамм"), state=None)
+    dp.register_message_handler(load_width, state=FSMAdmin.width)
+    dp.register_message_handler(load_length, state=FSMAdmin.length)
+    # @bot.message_handler(content_types=['document'])
+    # dp.register_message_handler(handle_docs_photo, Text("Печать на сетке"))
 
-def callback_query_hadler(dp: Dispatcher):
-    dp.callback_query_hadler(www_call, text='www')
+
+
 
 
 
