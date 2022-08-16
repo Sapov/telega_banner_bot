@@ -41,6 +41,11 @@ def materials():
     '''фукция получает на вход название материала и определяет ширины роликов материалов'''
 
 width_banner_list = [1.1, 1.37, 1.6, 2.2, 2.5, 3.2]
+whidth_film_oraget_list =[1.05, 1.26, 1.37, 1.52]
+whidth_film_china_list = [1.07, 1.27, 1.37, 1.5]
+whidth_paper = [1.26, 1.3, 1.6]
+
+
 def select_banner(length_banner, whidh_banner, price_banner): # подбираем ширину ролика для печати
     # global width_banner
     if whidh_banner < 3.1:
@@ -60,7 +65,7 @@ def select_banner(length_banner, whidh_banner, price_banner): # подбирае
         # banner.append(width_banner)
         # banner.append(length_banner)
         # print(banner)
-        # считаем стоимсть печати умножаем ширину ролика на стоимтст прайса
+        # считаем стоимсть печати умножаем ширину ролика на стоимтсть прайса
         price_print = price_banner * width_banner * length_banner
         print("Стоимость печати баннера:", round(price_print, 1), "руб.")
         luvers = (width_banner + length_banner)*2*price_luvers
