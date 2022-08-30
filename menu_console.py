@@ -31,8 +31,7 @@ def razmer(pole=True):
     whidh_banner - Ширина баннера'''
     length_banner = pyip.inputFloat("Введите ширину печати в метрах: ")
     whidh_banner = pyip.inputFloat("Введите длину печати в метрах: ")
-    if pole:
-
+    if pole: # считаем  поле если есть параметр поле
         pole_for_luvers = pyip.inputYesNo('''Нужно ли прибавить поля для установки люверсов или проклейки?
         Введите:
                  Да.

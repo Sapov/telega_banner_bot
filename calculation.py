@@ -16,7 +16,7 @@ def calculation(material_name, whidth_material=1, higth_material=3, pole_for_luv
 
     global whidth_roll
     if whidth_material > higth_material:
-        whidth_material, higth_material = higth_material, whidth_material
+        whidth_material, higth_material = higth_material, whidth_material # длина всегда больше ширины
     print(f' ширина печати {whidth_material}m а длина: {higth_material}m')
     if pole_for_luvers:  # если нужно поле под люверсы добавляем по 5 см с каждой стороны
         higth_material = higth_material + 0.1
@@ -24,7 +24,6 @@ def calculation(material_name, whidth_material=1, higth_material=3, pole_for_luv
         print(f' Размер печати с полями  имеет размер {higth_material} x {whidth_material}')
         # print(material_name)
     # Сравниваем ширины роликов баннера 440 грамм
-    # width_banner_roll = data.width_440_banner_roll
     width_banner_roll = material_banner[material_name][1]
     for i in width_banner_roll:
         if whidth_material <= material_banner[material_name][1][-1]: # максимальная ширина ролика а потом склейка

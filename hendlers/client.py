@@ -27,7 +27,7 @@ class FSMAdmin(StatesGroup):
     pole = State()
 
 
-async def banner_440 (message: types.Message):
+async def banner_440(message: types.Message):
     await FSMAdmin.width.set()
     await message.answer("Введите ширину в метрах ")
 
