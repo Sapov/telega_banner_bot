@@ -47,7 +47,7 @@ def calculation(material_name, whidth_material=1, higth_material=3, pole_for_luv
                     price_material = round(price_material * 1.475)
                 print(f' Для user {user} Стоимость печати 1 м2: {price_material} руб.')
                 square_print = round(whidth_roll * higth_material, 1)
-                price = round(price_material * square_print,1)
+                price = round(price_material * square_print)
                 luvers_work = round((higth_material*whidth_material)*data.price_luvers*2,1)
                 print(f'  Площадь печати {square_print}m2')
                 print(f' Напечатать на материале {material_name} стоит {price} руб.')

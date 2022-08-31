@@ -42,7 +42,7 @@ def razmer(pole=True):
     length_banner = pyip.inputFloat("Введите ширину печати в метрах: ")
     whidh_banner = pyip.inputFloat("Введите длину печати в метрах: ")
     if pole: # считаем  поле если есть параметр поле
-        pole_for_luvers = pyip.inputMenu('''Нужно ли прибавить поля для установки люверсов или проклейки?
+        pole_for_luvers = pyip.inputYesNo('''Нужно ли прибавить поля для установки люверсов или проклейки?
         Введите:
                  Да.
                  Нет. : ''', yesVal="да", noVal='нет')
@@ -59,7 +59,7 @@ def change_material(user):
     Длину, ширину, стоимость за 1 м2 и имя материала для расчета по ширине ролика"""
     change_material = pyip.inputMenu(list(fist_change_material), numbered=True)
     if change_material == "Печать на баннере":
-        variant = pyip.inputMenu(list(banner), numbered=True)
+        variant = pyip.inputMenu([i for i in material_banner if 'Баннер' in i], numbered=True)
         if variant == "Баннер 440 грамм":
 
             calculation.calculation(variant, *razmer(),user)
@@ -68,46 +68,46 @@ def change_material(user):
 
         elif variant == "Баннер 330 грамм":
             # main(*(razmer() + ("Баннер 330 грамм",)))
-            calculation.calculation(variant, *razmer())
+            calculation.calculation(variant, *razmer(),user)
 
         elif variant == "Баннер 510 грамм (литой)":
-            calculation.calculation(variant, *razmer())
+            calculation.calculation(variant, *razmer(),user)
     elif change_material == "Печать на сетке":
-        calculation.calculation(change_material, *razmer())
+        calculation.calculation(change_material, *razmer(),user)
 
 
     elif change_material == "Печать на пленке":
-        variant = pyip.inputMenu(list(material_film), numbered=True)# если razmer(False)значит для материала не нужно поле и люверсы
+        variant = pyip.inputMenu([i for i in material_banner if 'Пленка' in i], numbered=True)# если razmer(False)значит для материала не нужно поле и люверсы
         if variant == 'Пленка orajet_3640 белая матовая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == 'Пленка orajet_3640 белая Глянцвая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == 'Пленка Orajet_3640 прозрачная Глянцвая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == 'Пленка Orajet_3640 прозрачная Матовая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == 'Пленка Китай белая матовая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == 'Пленка Китай белая глянцевая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == 'Пленка Китай прозрачная матовая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == 'Пленка Китай прозрчная глянцевая':
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
 
 
     elif change_material == "Печать на перфопленке":
-        calculation.calculation(change_material, *razmer(False))
+        calculation.calculation(change_material, *razmer(False),user)
 
     elif change_material == "Печать на бумаге":
         variant = pyip.inputMenu(list(material_paper), numbered=True)
         if variant == "Бумага blueback":
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
         elif variant == "Бумага CityLight 150 грамм":
-            calculation.calculation(variant, *razmer(False))
+            calculation.calculation(variant, *razmer(False),user)
 
     elif change_material == "Печать на фотообоях":
-        calculation.calculation(change_material, *razmer(False))
+        calculation.calculation(change_material, *razmer(False),user)
 
 
 ####
