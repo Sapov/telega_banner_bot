@@ -100,7 +100,7 @@ def change_material(user):
         calculation.calculation(change_material, *razmer(False),user)
 
     elif change_material == "Печать на бумаге":
-        variant = pyip.inputMenu(list(material_paper), numbered=True)
+        variant = pyip.inputMenu([i for i in material_banner if 'Бумага' in i], numbered=True)
         if variant == "Бумага blueback":
             calculation.calculation(variant, *razmer(False),user)
         elif variant == "Бумага CityLight 150 грамм":
