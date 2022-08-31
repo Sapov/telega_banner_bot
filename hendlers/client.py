@@ -29,7 +29,7 @@ class FSMAdmin(StatesGroup):
 
 async def banner_440(message: types.Message):
     await FSMAdmin.width.set()
-    await message.answer("Введите ширину в метрах ")
+    await message.answer("Введите ширину в метрах: ")
 
 # !!!!!!
 # @dp.message_handler(commands=["Печать на баннере"])

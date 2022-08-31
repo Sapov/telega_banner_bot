@@ -25,6 +25,16 @@ import pyinputplus as pyip
 from data import *
 
 
+def change_user():
+    '''
+    Выбор для кого считаем для РА или для розничного заказчика
+
+    :return: выводим change_material() или change_material()
+    '''
+    user = pyip.inputMenu(['Рекламное агентство', 'Розничный заказчик'],numbered=True)
+    change_material(user='Розничный заказчик') if user == 'Розничный заказчик' else  change_material(user='Рекламное агентство')
+
+
 def razmer(pole=True):
     '''Запрашиваем размеры Материала" и спрашиваем нужно ли поле для люверсов
     length_banner - Длина баннера
@@ -32,7 +42,7 @@ def razmer(pole=True):
     length_banner = pyip.inputFloat("Введите ширину печати в метрах: ")
     whidh_banner = pyip.inputFloat("Введите длину печати в метрах: ")
     if pole: # считаем  поле если есть параметр поле
-        pole_for_luvers = pyip.inputYesNo('''Нужно ли прибавить поля для установки люверсов или проклейки?
+        pole_for_luvers = pyip.inputMenu('''Нужно ли прибавить поля для установки люверсов или проклейки?
         Введите:
                  Да.
                  Нет. : ''', yesVal="да", noVal='нет')
@@ -43,7 +53,7 @@ def razmer(pole=True):
     return length_banner, whidh_banner, pole_for_luvers
 
 
-def change_material():
+def change_material(user):
     """ Выводим менюшку для выбора материла для печати
     -- передаем в расчет
     Длину, ширину, стоимость за 1 м2 и имя материала для расчета по ширине ролика"""
@@ -52,7 +62,9 @@ def change_material():
         variant = pyip.inputMenu(list(banner), numbered=True)
         if variant == "Баннер 440 грамм":
 
-            calculation.calculation(variant, *razmer())
+            calculation.calculation(variant, *razmer(),user)
+            # print(f' FOR {user} ')
+
 
         elif variant == "Баннер 330 грамм":
             # main(*(razmer() + ("Баннер 330 грамм",)))
@@ -99,4 +111,5 @@ def change_material():
 
 
 ####
-change_material()
+# change_material()
+change_user()
